@@ -1,0 +1,5 @@
+REVOKE INSERT ON *.* FROM 'sys_temp'@'localhost';
+REVOKE UPDATE ON *.* FROM 'sys_temp'@'localhost';
+REVOKE DELETE ON *.* FROM 'sys_temp'@'localhost';
+SHOW GRANTS FOR 'sys_temp'@'localhost';
+
