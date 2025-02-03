@@ -1,0 +1,35 @@
+#Установка MySQL
+sudo apt update
+sudo apt install mysql-server mysql-client
+#
+#задать пароль для root
+mysqladmin password -u root -p
+#
+#подключаемся к MySQL с помощью консольного клиента
+mysql -u root -p
+#
+#создадим локального пользователя sys_temp
+CREATE USER 'sys_temp'@'localhost' IDENTIFIED BY '1234567890';
+#
+#Даем все права для пользователя sys_temp
+GRANT ALL PRIVILEGES ON * . * TO 'sys_temp'@'localhost';
+#
+#Переподключитесь к базе данных от имени sys_temp
+exit
+mysql -u sys_temp -p
+ALTER USER 'sys_test'@'localhost' IDENTIFIED WITH mysql_native_password BY 'SyS_1234567890';
+FLUSH PRIVILEGES;
+exit
+#
+#Скачать и распаковать архив
+wgrt https://downloads.mysql.com/docs/sakila-db.zip
+unzip /home/user/sakila-db.zip
+#
+#Восстановление базы из архива
+mysql -u sys_temp -p
+CREATE DATABASE sakila DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+exit
+cat /home/user/sakila-db/*.sql | mysql -u sys_temp -p sakila
+
+
+
